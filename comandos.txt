@@ -1,0 +1,5 @@
+npm install cypress
+npx cypress install
+npx cypress install --force
+npx cypress verify
+npx cypress open
