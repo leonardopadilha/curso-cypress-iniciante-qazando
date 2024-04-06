@@ -45,4 +45,29 @@ describe('Login de usuário', () => {
                 expect(inputEmail).to.be.empty;
             })
     })
+
+    it('Validar campo e-mail invalido', () => {
+        
+        cy.visit('/')
+            .get('#electronics_banner')
+                .should('be.visible')
+
+        cy.get('.right_list_fix li:first-child a')
+            .click()
+
+        cy.url()
+            .should('include', '/login')
+
+        cy.get('#user')
+            .type('fdafsafsd.com')
+
+        cy.get('.login_submit button')
+            .click()
+
+        cy.get('.account_form div:nth-child(2) input + span')
+            .should('be.visible')
+            .then((message) => {
+                expect(message.text()).to.equal('E-mail inválido.')
+            })
+    })
 })
