@@ -5,10 +5,11 @@ Automação de Testes Web com Cypress - Básico
 ## Etiquetas
 
 [![Cypress](https://img.shields.io/badge/License-cypress-blue.svg)](https://www.cypress.io/)
+[![Faker](https://img.shields.io/badge/License-faker-red.svg)](https://www.npmjs.com/package/@faker-js/faker)
 
 ## Instalação
 
-Instale a API com NPM
+Instalação
 
 ```bash
   npm install
@@ -17,5 +18,6 @@ Instale a API com NPM
 ## Execução
 
 ```bash
-  npx open cypress
+  npx open cypress ou
+  npm test
 ```
