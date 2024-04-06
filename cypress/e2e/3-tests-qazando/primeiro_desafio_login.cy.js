@@ -26,4 +26,23 @@ describe('Login de usuário', () => {
                 expect(inputEmail).to.be.empty;
             })
     })
+
+    it('Validar campo e-mail vazio', () => {
+
+        cy.visit('/')
+            .get('#electronics_banner')
+                .should('be.visible')
+
+        cy.get('.right_list_fix li:first-child a')
+            .click()
+
+        cy.url()
+            .should('include', '/login')
+
+        cy.get('#password')
+            .should('be.visible')
+            .then((inputEmail) => {
+                expect(inputEmail).to.be.empty;
+            })
+    })
 })
