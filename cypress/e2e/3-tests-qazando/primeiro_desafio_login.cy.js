@@ -71,7 +71,7 @@ describe('Login de usuário', () => {
             })
     })
 
-    it('Validar campo senha invalido', () => {
+    it('Validar campo senha inválido', () => {
 
         cy.visit('/')
         .get('#electronics_banner')
@@ -96,6 +96,43 @@ describe('Login de usuário', () => {
             .should('be.visible')
             .then((message) => {
                 expect(message.text()).to.equal('Senha inválida.')
+            })
+    })
+
+    it('Validar login com sucesso', () => {
+
+        cy.visit('/')
+        .get('#electronics_banner')
+            .should('be.visible')
+
+        cy.get('.right_list_fix li:first-child a')
+            .click()
+
+        cy.url()
+            .should('include', '/login')
+
+        cy.get('#user')
+            .type(email)
+
+        cy.get('#password')
+            .type(password)
+
+        cy.get('.login_submit button')
+            .click()
+
+        cy.get('.swal2-success div:nth-child(4)')
+            .should('be.visible')
+
+        cy.get('#swal2-title')
+            .should('be.visible')
+            .then((loginSuccess) => {
+                expect(loginSuccess.text()).to.equal('Login realizado')
+            })
+
+        cy.get('#swal2-html-container')
+            .should('be.visible')
+            .then((messageSucces) => {
+                expect(messageSucces.text()).to.equal(`Olá, ${email}`)
             })
     })
 })
