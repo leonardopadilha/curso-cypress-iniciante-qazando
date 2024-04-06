@@ -46,7 +46,7 @@ describe('Login de usuário', () => {
             })
     })
 
-    it('Validar campo e-mail invalido', () => {
+    it('Validar campo e-mail inválido', () => {
         
         cy.visit('/')
             .get('#electronics_banner')
@@ -68,6 +68,34 @@ describe('Login de usuário', () => {
             .should('be.visible')
             .then((message) => {
                 expect(message.text()).to.equal('E-mail inválido.')
+            })
+    })
+
+    it('Validar campo senha invalido', () => {
+
+        cy.visit('/')
+        .get('#electronics_banner')
+            .should('be.visible')
+
+        cy.get('.right_list_fix li:first-child a')
+            .click()
+
+        cy.url()
+            .should('include', '/login')
+
+        cy.get('#user')
+            .type('teste@teste.com')
+
+        cy.get('#password')
+            .type(invalidPassword)
+
+        cy.get('.login_submit button')
+            .click()
+
+        cy.get('.account_form div:nth-child(3) input + span')
+            .should('be.visible')
+            .then((message) => {
+                expect(message.text()).to.equal('Senha inválida.')
             })
     })
 })
