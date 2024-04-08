@@ -88,4 +88,27 @@ describe("Cadastro de usuário", () => {
         );
       });
   });
+
+  it("Validar cadastro com sucesso com fakerjs", () => {
+
+    cy.get("#user").type(name);
+    cy.get("#email").type(email);
+    cy.get("#password").type(password);
+
+    cy.get("#btnRegister").should("be.visible").click();
+
+    cy.get(".swal2-success div:nth-child(4)").should("be.visible");
+
+    cy.get("#swal2-title")
+      .should("be.visible")
+      .then((createUserSuccess) => {
+        expect(createUserSuccess.text()).to.equal("Cadastro realizado!");
+      });
+
+    cy.get("#swal2-html-container")
+      .should("be.visible")
+      .then((messageSucces) => {
+        expect(messageSucces.text()).to.equal(`Bem-vindo ${name}`);
+      });
+  });
 });
