@@ -69,4 +69,23 @@ describe("Cadastro de usuário", () => {
         );
       });
   });
+
+  it("Validar campo senha invalido", () => {
+
+    cy.get("#user").type(name);
+
+    cy.get("#email").type(email);
+
+    cy.get("#password").type(invalidPassword);
+
+    cy.get("#btnRegister").should("be.visible").click();
+
+    cy.get("#errorMessageFirstName")
+      .should("be.visible")
+      .then((errorMessage) => {
+        expect(errorMessage).to.contain(
+          "O campo senha deve ter pelo menos 6 dígitos"
+        );
+      });
+  });
 });
