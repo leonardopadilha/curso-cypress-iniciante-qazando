@@ -35,4 +35,21 @@ describe("Cadastro de usuário", () => {
         expect(errorMessage).to.contain("O campo nome deve ser prenchido");
       });
   });
+
+  it("Validar campo e-mail vazio", () => {
+
+    cy.get("#user").type(name);
+
+    cy.get("#btnRegister").should("be.visible").click();
+
+    cy.get("#email").should("be.empty");
+
+    cy.get("#errorMessageFirstName")
+      .should("be.visible")
+      .then((errorMessage) => {
+        expect(errorMessage).to.contain(
+          "O campo e-mail deve ser prenchido corretamente"
+        );
+      });
+  });
 });
