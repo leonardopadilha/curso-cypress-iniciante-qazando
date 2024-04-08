@@ -111,4 +111,27 @@ describe("Cadastro de usuário", () => {
         expect(messageSucces.text()).to.equal(`Bem-vindo ${name}`);
       });
   });
+
+  it("Validar cadastro com sucesso utilizando fixtures", () => {
+
+    cy.get("#user").type(user.name);
+    cy.get("#email").type(user.email);
+    cy.get("#password").type(user.password);
+
+    cy.get("#btnRegister").should("be.visible").click();
+
+    cy.get(".swal2-success div:nth-child(4)").should("be.visible");
+
+    cy.get("#swal2-title")
+      .should("be.visible")
+      .then((createUserSuccess) => {
+        expect(createUserSuccess.text()).to.equal("Cadastro realizado!");
+      });
+
+    cy.get("#swal2-html-container")
+      .should("be.visible")
+      .then((messageSucces) => {
+        expect(messageSucces.text()).to.equal(`Bem-vindo ${user.name}`);
+      });
+  });
 });
