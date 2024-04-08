@@ -52,4 +52,21 @@ describe("Cadastro de usuário", () => {
         );
       });
   });
+
+  it("Validar campo e-mail invalido", () => {
+
+    cy.get("#user").type(name);
+
+    cy.get("#email").type(invalidPassword);
+
+    cy.get("#btnRegister").should("be.visible").click();
+
+    cy.get("#errorMessageFirstName")
+      .should("be.visible")
+      .then((errorMessage) => {
+        expect(errorMessage).to.contain(
+          "O campo e-mail deve ser prenchido corretamente"
+        );
+      });
+  });
 });
